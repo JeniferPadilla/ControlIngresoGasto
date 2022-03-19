@@ -1,0 +1,73 @@
+﻿@model IEnumerable<ControlIngresoGasto.Models.IngrseoGasto>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Ingreso y Gastos</h1>
+
+<form class="row g-3" asp-action="index">
+
+    <div class="col-auto col-md-1">
+         <label  class="control-label"> Mes/Año</label>
+    </div>
+  <div class="col-auto col-md-2">
+    <input type="number"  class="form-control"  name="mes" min="1" max="12" value="@ViewBag.mes" >
+  </div>
+  <div class="col-auto col-md-2">
+    <input type="number" class="form-control" autocomplete="off" name="anio" value="@ViewBag.anio">
+  </div>
+  <div class="col-auto">
+    <button type="submit" class="btn btn-primary mb-3">Consultar</button>
+  </div>
+</form>
+
+<p>
+    <a asp-action="Create" class="btn btn-success">Crear Nuevo</a>
+</p>
+<table class="table">
+    <thead class="table-dark">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Categoria)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Fecha)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Valor)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Categoria.NombreCateroria)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Fecha)
+                </td>
+                <td>
+                    @if (item.Categoria.Tipo == "IN")
+                    {
+                        <p class="text-primary text-right"> @Html.DisplayFor(modelItem => item.Valor)</p>
+                    }
+                    else
+                    {
+                        <p class="text-danger text-right"> @Html.DisplayFor(modelItem => item.Valor)</p>
+                    }
+
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
