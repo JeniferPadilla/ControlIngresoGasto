@@ -54,11 +54,11 @@
                 <td>
                     @if (item.Categoria.Tipo == "IN")
                     {
-                        <p class="text-primary text-right"> @Html.DisplayFor(modelItem => item.Valor)</p>
+                        <p class="text-primary text-end">$ @Html.DisplayFor(modelItem => item.Valor)</p>
                     }
                     else
                     {
-                        <p class="text-danger text-right"> @Html.DisplayFor(modelItem => item.Valor)</p>
+                        <p class="text-danger text-end">$ @Html.DisplayFor(modelItem => item.Valor)</p>
                     }
 
                 </td>
